@@ -1,0 +1,65 @@
+#ifndef FUZZY_LOGIC_H
+#define FUZZY_LOGIC_H
+
+#include <string>
+using namespace std;
+
+string getSignalTime(string density, string waiting);
+
+#endif
+#include "fuzzy_logic.h"
+
+// Fuzzy Rule Base Implementation
+string getSignalTime(string density, string waiting) {
+
+    // Rules
+    if (density == "Low" && waiting == "Short")
+        return "Short";
+
+    if (density == "Low" && waiting == "Medium")
+        return "Medium";
+
+    if (density == "Low" && waiting == "Long")
+        return "Medium";
+
+    if (density == "Medium" && waiting == "Short")
+        return "Medium";
+
+    if (density == "Medium" && waiting == "Medium")
+        return "Medium";
+
+    if (density == "Medium" && waiting == "Long")
+        return "Long";
+
+    if (density == "High" && waiting == "Short")
+        return "Medium";
+
+    if (density == "High" && waiting == "Medium")
+        return "Long";
+
+    if (density == "High" && waiting == "Long")
+        return "Long";
+
+    return "Invalid Input";
+}
+#include <iostream>
+#include "fuzzy_logic.h"
+using namespace std;
+
+int main() {
+    string density, waiting;
+
+    cout << "Traffic Signal Control using Fuzzy Logic\n";
+
+    cout << "\nEnter Traffic Density (Low/Medium/High): ";
+    cin >> density;
+
+    cout << "Enter Waiting Time (Short/Medium/Long): ";
+    cin >> waiting;
+
+    string result = getSignalTime(density, waiting);
+
+    cout << "\nOptimal Signal Time: " << result << endl;
+
+    return 0;
+}
